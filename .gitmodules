@@ -1,0 +1,9 @@
+[submodule "qaf"]
+	path = qaf
+	url = https://github.com/qmetry/qaf.git
+[submodule "qaf-cucumber"]
+	path = qaf-cucumber
+	url = https://github.com/qmetry/qaf-cucumber.git
+[submodule "qaf-support-openapi"]
+	path = qaf-support-openapi
+	url = https://github.com/qmetry/qaf-support-openapi.git
