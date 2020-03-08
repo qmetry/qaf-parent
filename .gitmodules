@@ -7,3 +7,9 @@
 [submodule "qaf-support-openapi"]
 	path = qaf-support-openapi
 	url = https://github.com/qmetry/qaf-support-openapi.git
+[submodule "qaf-support"]
+	path = qaf-support
+	url = https://github.com/qmetry/qaf-support.git
+[submodule "qaf-support-ws"]
+	path = qaf-support-ws
+	url = https://github.com/qmetry/qaf-support-ws.git
