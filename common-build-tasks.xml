@@ -24,6 +24,8 @@
 	<property name="debuglevel" value="source,lines,vars" />
 	<property name="target" value="1.8" />
 	<property name="source" value="1.8" />
+	<property name="ivy.revision=" value="latest-SNAPSHOT" />
+
 	<property file="build.properties" />
 	<property name="ivysettings.xml" value="../ivysettings.xml" />
     <available file="${ivysettings.xml}" property="ivysettings.present"/>
@@ -72,10 +74,11 @@
 
 	<target name="load-setting" depends="install-ivy" if="ivysettings.present">
 	    <ivy:settings file="${ivysettings.xml}" />
+		<delete dir="${user.home}/.ivy2/cache/com.qmetry" failonerror="false" verbose="true" />
 	</target> 
 	<!-- ================================= target: resolve ================================= -->
 	<target name="resolve" description="--> retrieve dependencies with ivy" depends="install-ivy, load-setting">
-		<ivy:resolve file="ivy.xml" />
+		<ivy:resolve file="ivy.xml" overwriteMode="newer" />
 		<ivy:cachepath pathid="lib.path.id" />
 		<ivy:addpath topath="build.classpath">
 			<path refid="lib.path.id" />
@@ -84,7 +87,7 @@
 		<ivy:cachepath pathid="test.path"/>
 	</target>
 
-	<target name="init" depends="resolve">
+	<target name="init" depends="clean, resolve">
 		<mkdir dir="${bin.dir}" />
 		<mkdir dir="${dist.dir}" />
 		<copy includeemptydirs="false" todir="${bin.dir}">
@@ -164,17 +167,20 @@
 			<mapping conf="test" scope="test" />
 			<mapping conf="provided" scope="provided" />
 		</ivy:makepom>
-
+		<ivy:convertpom pomfile="${dist.dir}/${ivy.module}.pom"
+				ivyfile="${dist.dir}/ivy.xml" description="create IVY" />
 		<!-- Publish the local repo. Defaults to ~/.ivy2/local -->
-		<ivy:publish resolver="local-m2-publish" forcedeliver="true"
-			publishivy="true" pubrevision="${release.num}" overwrite="true">
+		<ivy:publish resolver="local-m2-publish" forcedeliver="false"
+			 pubrevision="${release.num}" overwrite="true">
 			<artifacts pattern="${dist.dir}/[artifact].[ext]" />
+			<!-- <artifact name="${ivy.module}" pattern="${dist.dir}/[artifact].[ext]"
+				ext="pom" type="pom" version="${release.num}" /> 
 			<artifact name="${ivy.module}" pattern="${dist.dir}/[artifact].[ext]"
-				ext="pom" type="pom" version="${release.num}" />
+							ext="pom" type="pom" version="${release.num}" />
 			<artifact name="${ivy.module}-sources" pattern="${dist.dir}/[artifact].[ext]"
 				ext="jar" classifier="sources" type="sources" version="${release.num}" />
 			<artifact name="${ivy.module}-javadoc" pattern="${dist.dir}/[artifact].[ext]"
-				ext="jar" classifier="javadoc" type="javadoc" version="${release.num}" />
+				ext="jar" classifier="javadoc" type="javadoc" version="${release.num}" />-->
 		</ivy:publish>
 	</target>
 

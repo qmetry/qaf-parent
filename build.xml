@@ -38,14 +38,17 @@ For any inquiry or need additional information, please contact support-qaf@infos
 		</sequential>
 	</macrodef>
 	<target name="build">
-		<subant failonerror="true" inheritall="true">
+		<subant failonerror="true" inheritall="true" >
 			<filelist files="${allprojects}" dir="." />
 			<target name="clean" />
 			<target name="build" />
-			<target name="deploy-local" />
+			<target name="publish" />
 		</subant>
 	</target>
 
+	<target name="deploy-local">
+			<iterate target="deploy-local" />
+	</target>
 	<target name="ivy-publish-share">
 		<iterate target="publish-share" />
 	</target>
