@@ -8,6 +8,8 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
+  repository_dispatch:
+    branches: [ master ]
 
 jobs:
   build:
@@ -25,4 +27,4 @@ jobs:
       with:
         java-version: 1.8
     - name: Build with Ant
-      run: ant -noinput -buildfile build.xml -Dskip.download=false
+      run: ant -noinput -buildfile build.xml -Dskip.download=false -quiet
