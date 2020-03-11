@@ -33,12 +33,12 @@ For any inquiry or need additional information, please contact support-qaf@infos
 		<attribute name="target" />
 		<sequential>
 			<subant target="@{target}" inheritall="true">
-				<filelist files="qaf/build.xml, qaf-cucumber/build.xml" dir="." />
+				<filelist files="${allprojects}" dir="." />
 			</subant>
 		</sequential>
 	</macrodef>
 	<target name="build">
-		<subant failonerror="true" inheritall="true" >
+		<subant failonerror="true" inheritall="true">
 			<filelist files="${allprojects}" dir="." />
 			<target name="clean" />
 			<target name="build" />
