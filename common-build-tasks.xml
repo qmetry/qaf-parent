@@ -106,7 +106,8 @@
 		<delete dir="${dist.dir}/docs" />
 		<mkdir dir="${dist.dir}/docs" />
 		
-		<javadoc sourcepath="${src.dir}" destdir="${dist.dir}/docs" additionalparam="-Xdoclint:none" />
+		<javadoc sourcepath="${src.dir}" destdir="${dist.dir}/docs" additionalparam="-Xdoclint:none" 
+			verbose="false" author="true" version="true" use="true" classpathref="build.classpath"/>
 		<jar compress="true" destfile="${dist.dir}/${ivy.module}-javadoc.jar" basedir="${dist.dir}/docs" />
 		
 		<delete dir="${dist.dir}/docs">
