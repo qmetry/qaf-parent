@@ -104,10 +104,11 @@
 
 	<target name="gendoc" depends="init" description="generate documentation">
 		<delete dir="${dist.dir}/docs" />
-
 		<mkdir dir="${dist.dir}/docs" />
-		<javadoc sourcepath="${src.dir}" destdir="${dist.dir}/docs" />
+		
+		<javadoc sourcepath="${src.dir}" destdir="${dist.dir}/docs" additionalparam="-Xdoclint:none" />
 		<jar compress="true" destfile="${dist.dir}/${ivy.module}-javadoc.jar" basedir="${dist.dir}/docs" />
+		
 		<delete dir="${dist.dir}/docs">
 		</delete>
 	</target>
