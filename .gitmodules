@@ -13,3 +13,6 @@
 [submodule "qaf-support-ws"]
 	path = qaf-support-ws
 	url = https://github.com/qmetry/qaf-support-ws.git
+[submodule "qaf-support-elasticsearch"]
+	path = qaf-support-elasticsearch
+	url = https://github.com/qmetry/qaf-support-elasticsearch.git

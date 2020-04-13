@@ -26,7 +26,7 @@ For any inquiry or need additional information, please contact support-qaf@infos
 -->
 
 <project basedir="." default="build" name="qaf-all" xmlns:ivy="antlib:org.apache.ivy.ant">
-	<property name="allprojects" value="qaf/build.xml, qaf-support/build.xml, qaf-support-ws/build.xml, qaf-support-openapi/build.xml, qaf-cucumber/build.xml" />
+	<property name="allprojects" value="qaf/build.xml, qaf-support/build.xml, qaf-support-ws/build.xml, qaf-support-openapi/build.xml, qaf-cucumber/build.xml, qaf-support-elasticsearch/build.xml" />
 	<property file="build.properties" />
 
 	<macrodef name="iterate">
@@ -37,8 +37,20 @@ For any inquiry or need additional information, please contact support-qaf@infos
 			</subant>
 		</sequential>
 	</macrodef>
+	<macrodef name="git">
+		<attribute name="command" />
+		<attribute name="dir" default="" />
+		<element name="args" optional="true" />
+		<sequential>
+			<echo message="git @{command}" />
+			<exec executable="git" dir="@{dir}">
+				<arg value="@{command}" />
+				<args />
+			</exec>
+		</sequential>
+	</macrodef>
 	<target name="build">
-		<subant failonerror="true" inheritall="true">
+		<subant failonerror="true" inheritall="true" >
 			<filelist files="${allprojects}" dir="." />
 			<target name="clean" />
 			<target name="build" />
@@ -46,10 +58,81 @@ For any inquiry or need additional information, please contact support-qaf@infos
 		</subant>
 	</target>
 
+	<target name="test">
+		<subant failonerror="true" inheritall="true" >
+					<filelist files="qaf-cucumber/build.xml" dir="." />
+					<target name="test" />
+				</subant>
+	</target>
 	<target name="deploy-local">
-			<iterate target="deploy-local" />
+		<iterate target="deploy-local" />
 	</target>
 	<target name="ivy-publish-share">
 		<iterate target="publish-share" />
+	</target>
+	<target name="tag-release-all">
+		<iterate target="getChangelog" />
+		<iterate target="tag-release"/>
+	</target>
+	<macrodef name="git">
+		<attribute name="command" />
+		<attribute name="dir" default="${basedir}" />
+		<attribute name="outProperty" default="git.cmd.output" />
+
+		<element name="args" optional="true" />
+		<sequential>
+			<echo message="git @{command}" />
+			<exec executable="git" dir="@{dir}" outputproperty="@{outProperty}">
+				<arg value="@{command}" />
+				<args />
+			</exec>
+		</sequential>
+	</macrodef>
+	<macrodef name="hub">
+		<attribute name="command" />
+		<attribute name="dir" default="${basedir}" />
+		<attribute name="outProperty" default="hub.output" />
+
+		<element name="args" optional="true" />
+		<sequential>
+			<echo message="hub @{command}" />
+			<exec executable="hub" dir="@{dir}" outputproperty="@{outProperty}">
+				<arg value="@{command}" />
+				<args />
+			</exec>
+		</sequential>
+	</macrodef>
+	<target name="getChangelog">
+		<git command="describe" outproperty="hub.cmd.output">
+			<args>
+				<arg value="--tags" />
+				<arg value="--abbrev=0" />
+			</args>
+		</git>
+		<echo>Last Tag:${basedir}: ${git.cmd.output}</echo>
+		<git command="log" outproperty="git.log.outputog">
+			<args>
+				<arg value="${git.cmd.output}..HEAD" />
+				<arg value="--oneline" />
+			</args>
+		</git>
+		<echo  file="release-notes.txt" append="false">${artifact.name} Release ${release.num}${line.separator}${line.separator}</echo>
+		<echo file="release-notes.txt" append="true">
+			${git.log.outputog}
+		</echo>
+	</target>
+	<target name="tag-release" >
+		<!-- hub release create - -copy -F release-notes.txt v2.3.0 -->
+		<hub command="release"  outProperty="hub.output" >
+					<args>
+						<arg value="create"/>
+						<arg value="${release.num}"/>
+						<arg value="--prerelease"/>
+						<arg value="--file"/>
+						<arg value="qaf/out.txt"/>
+					</args>
+				</hub> 
+
+		<echo>${hub.output}</echo>
 	</target>
 </project>
