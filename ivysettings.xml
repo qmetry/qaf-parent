@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- Licensed to the Apache Software Foundation (ASF) under one or more contributor 
+	license agreements. See the NOTICE file distributed with this work for additional 
+	information regarding copyright ownership. The ASF licenses this file to 
+	you under the Apache License, Version 2.0 (the "License"); you may not use 
+	this file except in compliance with the License. You may obtain a copy of 
+	the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required 
+	by applicable law or agreed to in writing, software distributed under the 
+	License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS 
+	OF ANY KIND, either express or implied. See the License for the specific 
+	language governing permissions and limitations under the License. -->
+<ivysettings>
+ 	<credentials host="oss.sonatype.org"
+                      realm="Sonatype Nexus Repository Manager"
+                      username="${sonatype.user}" passwd="${sonatype.pwd}"/>
+	<settings defaultResolver="qaf" />
+	<property name="nexus-public"
+                   value="https://oss.sonatype.org/content/groups/public"/>
+	<properties file="build.properties"/>
+	<caches  defaultCacheDir="${ivy.default.ivy.user.dir}/cache" checkUpToDate="true" />
+	<resolvers>
+		<chain name="qaf">
+			<ibiblio name="central" m2compatible="true" />
+			<ibiblio name="jai" m2compatible="true"
+				root="https://repository.jboss.org/nexus/content/repositories/thirdparty-releases" />
+			<ibiblio name="nexus-snapshots" m2compatible="true" root="${nexus-snapshots}" checkmodified="true" changingPattern="*-SNAPSHOT" useMavenMetadata="true" />
+		</chain>
+    	<ibiblio name="nexus" m2compatible="true" root="${nexus-public}"/>
+    	<ibiblio name="nexus-releases" m2compatible="true" root="${nexus-releases}"/>
+		<ibiblio name="nexus-staging" m2compatible="true" root="${nexus-staging}" useMavenMetadata="true" />
+		<filesystem name="local-m2-publish2" m2compatible="true" >
+		   	<ivy pattern="${ivy.default.ivy.user.dir}/local/[organisation]/[module]/[revision]/[module]-[revision].xml"/>
+	      	<artifact pattern="${ivy.default.ivy.user.dir}/local/[organisation]/[module]/[revision]/[module]-[revision](-[classifier]).[ext]"/>
+	    </filesystem>
+    	<filesystem name="local-ivy-publish" local="true">
+    	    <ivy pattern="${ivy.default.ivy.user.dir}/cache/[organisation]/[module]/ivy-[revision].xml"/>
+      		<artifact pattern="${ivy.default.ivy.user.dir}/cache/[organisation]/[module]/[type]s/[artifact]-[revision](-[classifier]).[ext]"/>
+      		<artifact pattern="${ivy.default.ivy.user.dir}/cache/[organisation]/[module]/[type]s/[artifact]-[revision](-[classifier]).[ext]"/>
+    	</filesystem>
+    	<filesystem name="local-m2-publish">
+            <ivy pattern="${ivy.default.ivy.user.dir}/local/[organisation]/[module]/ivy-[revision].xml"/>
+            <artifact pattern="${ivy.default.ivy.user.dir}/local/[organisation]/[module]/[artifact]-[revision].[ext]"/>
+        </filesystem>
+	</resolvers>
+    <modules>
+            <module organisation="com.qmetry" name=".*" resolver="local-m2-publish" />
+    </modules>
+	<publications>
+	    <artifact name="${ivy.module}" ext="jar" conf="binary" type="jar"/>
+	    <artifact name="${ivy.module}-javadoc" ext="jar" conf="development" type="javadoc"/>
+	    <artifact name="${ivy.module}-sources" ext="jar" conf="development" type="source"/>
+	</publications>
+</ivysettings>
