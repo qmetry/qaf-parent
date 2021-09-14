@@ -22,3 +22,6 @@
 [submodule "qaf-support-angular"]
 	path = qaf-support-angular
 	url = https://github.com/qmetry/qaf-support-angular.git
+[submodule "qaf-support-galen"]
+	path = qaf-support-galen
+	url = https://github.com/qmetry/qaf-support-galen.git
