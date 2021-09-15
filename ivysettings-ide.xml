@@ -10,9 +10,11 @@
 	OF ANY KIND, either express or implied. See the License for the specific 
 	language governing permissions and limitations under the License. -->
 <ivysettings>
+	<classpath url="https://repo1.maven.org/maven2/org/bouncycastle/bcprov-jdk14/1.45/bcprov-jdk14-1.45.jar"/>
+	<classpath url="https://repo1.maven.org/maven2/org/bouncycastle/bcpg-jdk14/1.45/bcpg-jdk14-1.45.jar"/>
  	<credentials host="oss.sonatype.org"
                       realm="Sonatype Nexus Repository Manager"
-                      username="${sonatype.user}" passwd="${sonatype.pwd}"/>
+                      username="${sonatype.user}" passwd="${sonatype.pwd}" />
 	<settings defaultResolver="qaf" />
 	<property name="nexus-public"
                    value="https://oss.sonatype.org/content/groups/public"/>
@@ -27,7 +29,7 @@
 		</chain>
     	<ibiblio name="nexus" m2compatible="true" root="${nexus-public}"/>
     	<ibiblio name="nexus-releases" m2compatible="true" root="${nexus-releases}"/>
-		<ibiblio name="nexus-staging" m2compatible="true" root="${nexus-staging}" useMavenMetadata="true" signer="${gpg.name}"/>
+		<ibiblio name="nexus-staging" m2compatible="true" root="${nexus-staging}" useMavenMetadata="true"/>
 		<filesystem name="local-m2-publish2" m2compatible="true" >
 		   	<ivy pattern="${ivy.default.ivy.user.dir}/local/[organisation]/[module]/[revision]/[module]-[revision].xml"/>
 	      	<artifact pattern="${ivy.default.ivy.user.dir}/local/[organisation]/[module]/[revision]/[module]-[revision](-[classifier]).[ext]"/>
@@ -45,12 +47,9 @@
     <modules>
             <module organisation="com.qmetry" name=".*" resolver="local-m2-publish" />
     </modules>
-	<publications>
-	    <artifact name="${ivy.module}" ext="jar" conf="binary" type="jar"/>
+	<publications >
+	    <artifact name="${ivy.module}" ext="jar" conf="binary" type="jar" />
 	    <artifact name="${ivy.module}-javadoc" ext="jar" conf="development" type="javadoc"/>
 	    <artifact name="${ivy.module}-sources" ext="jar" conf="development" type="source"/>
 	</publications>
-	<signers >
-    	<pgp name="${gpg.name}" password="${gpg.pwd}"/>
-	</signers>
 </ivysettings>
