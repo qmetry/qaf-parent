@@ -81,9 +81,8 @@
 			special installation -->
 		<echo message="installing ivy..." />
 		<get src="https://repo1.maven.org/maven2/org/apache/ivy/ivy/${ivy.install.version}/ivy-${ivy.install.version}.jar" dest="${ivy.jar.file}" usetimestamp="true" skipexisting="true" />
-		<!-- <get src="https://repo1.maven.org/maven2/org/bouncycastle/bcprov-jdk14/1.45/bcprov-jdk14-1.45.jar" dest="${ivy.jar.dir}" usetimestamp="true" skipexisting="true" />
+		<get src="https://repo1.maven.org/maven2/org/bouncycastle/bcprov-jdk14/1.45/bcprov-jdk14-1.45.jar" dest="${ivy.jar.dir}" usetimestamp="true" skipexisting="true" />
 		<get src="https://repo1.maven.org/maven2/org/bouncycastle/bcpg-jdk14/1.45/bcpg-jdk14-1.45.jar" dest="${ivy.jar.dir}" usetimestamp="true" skipexisting="true"/>
-		-->
 	</target>
 	<!-- ================================= target: install-ivy this target is 
 		not necessary if you put ivy.jar in your ant lib directory if you already 
