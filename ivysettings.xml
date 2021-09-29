@@ -16,7 +16,7 @@
 	<settings defaultResolver="qaf" />
 	<property name="nexus-public"
                    value="https://oss.sonatype.org/content/groups/public"/>
-	<properties file="build.properties"/>
+	<properties file="common-build.properties"/>
 	<caches  defaultCacheDir="${ivy.default.ivy.user.dir}/cache" checkUpToDate="true" />
 	<resolvers>
 		<chain name="qaf">
