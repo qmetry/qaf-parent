@@ -100,7 +100,7 @@
 	</target>
 
 	<target name="load-setting" depends="install-ivy" if="ivysettings.present">
-		<get src="https://raw.githubusercontent.com/qmetry/qaf-parent/master/build.properties" dest="../build.properties" skipexisting="true"/>
+		<get src="https://raw.githubusercontent.com/qmetry/qaf-parent/master/common-build.properties" dest="../common-build.properties" skipexisting="true"/>
 		<ivy:settings file="${ivysettings.xml}" />
 		<delete dir="${user.home}/.ivy2/cache/com.qmetry" failonerror="false" verbose="true" />
 	</target>
