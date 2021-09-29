@@ -29,7 +29,7 @@
 	<property file="build.properties" />
 	<property name="ivysettings.xml" value="../ivysettings.xml" />
 	<available file="${ivysettings.xml}" property="ivysettings.present" />
-	<get src="https://raw.githubusercontent.com/qmetry/qaf-parent/master/build.properties" dest="../build.properties" skipexisting="true"/>
+	<get src="https://raw.githubusercontent.com/qmetry/qaf-parent/master/build.properties" dest="${basedir}/../build.properties" skipexisting="true"/>
 
 
 	<!-- Sets the DSTAMP, TSTAMP, and TODAY properties in the current project -->
