@@ -25,3 +25,9 @@
 [submodule "qaf-support-galen"]
 	path = qaf-support-galen
 	url = https://github.com/qmetry/qaf-support-galen.git
+[submodule "qaf-support-mobile"]
+	path = qaf-support-mobile
+	url = https://github.com/qmetry/qaf-support-mobile.git
+[submodule "qaf-support-aem"]
+	path = qaf-support-aem
+	url = https://github.com/qmetry/qaf-support-aem.git

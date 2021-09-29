@@ -29,6 +29,7 @@
 	<property file="build.properties" />
 	<property name="ivysettings.xml" value="../ivysettings.xml" />
 	<available file="${ivysettings.xml}" property="ivysettings.present" />
+	<get src="https://raw.githubusercontent.com/qmetry/qaf-parent/master/build.properties" dest="../build.properties" skipexisting="true"/>
 
 
 	<!-- Sets the DSTAMP, TSTAMP, and TODAY properties in the current project -->
@@ -52,7 +53,7 @@
 	<taskdef classpathref="test.classpath" resource="org/aspectj/tools/ant/taskdefs/aspectjTaskdefs.properties" />
 
 	<echo level="info">--- test compile (start) ---</echo>
-	<iajc source="${source}" target="${target}" showweaveinfo="true" verbose="true" destdir="${bin.dir}" debug="false">
+	<iajc source="${source}" target="${target}" showweaveinfo="true" verbose="true" destdir="${bin.dir}" debug="false" encoding="utf-8">
 		<inpath location="${src.dir}">
 		</inpath>
 		<sourceroots>
@@ -115,6 +116,7 @@
 	</target>
 
 	<target name="init" depends="resolve">
+		<echo>===::${artifact.name}::===</echo>
 		<mkdir dir="${bin.dir}" />
 		<mkdir dir="${dist.dir}" />
 		<copy includeemptydirs="false" todir="${bin.dir}">
@@ -134,7 +136,7 @@
 		<delete dir="${dist.dir}/docs" />
 		<mkdir dir="${dist.dir}/docs" />
 
-		<javadoc sourcepath="${src.dir}" destdir="${dist.dir}/docs" additionalparam="-Xdoclint:none" verbose="false" author="true" version="true" use="true" classpathref="build.classpath" />
+		<javadoc sourcepath="${src.dir}" destdir="${dist.dir}/docs" additionalparam="-Xdoclint:none" verbose="false" author="true" version="true" use="true" classpathref="build.classpath" encoding="utf-8"/>
 		<jar compress="true" destfile="${dist.dir}/${ivy.module}-javadoc.jar" basedir="${dist.dir}/docs" />
 
 		<delete dir="${dist.dir}/docs">
