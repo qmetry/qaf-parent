@@ -27,7 +27,7 @@ For any inquiry or need additional information, please contact support-qaf@infos
 
 <project basedir="." default="build" name="qaf-all" xmlns:ivy="antlib:org.apache.ivy.ant">
 	<property name="allprojects" value="qaf/build.xml, qaf-support/build.xml, qaf-support-mobile/build.xml, qaf-support-ws/build.xml, qaf-support-aem/build.xml, qaf-support-galen/build.xml, qaf-support-flutter/build.xml, qaf-support-angular/build.xml, qaf-support-openapi/build.xml, qaf-cucumber/build.xml, qaf-support-elasticsearch/build.xml" />
-	<property file="build.properties" />
+	<property file="common-build.properties" />
 
 	<macrodef name="iterate">
 		<attribute name="target" />
