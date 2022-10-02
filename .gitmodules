@@ -31,3 +31,6 @@
 [submodule "qaf-support-aem"]
 	path = qaf-support-aem
 	url = https://github.com/qmetry/qaf-support-aem.git
+[submodule "qaf-support-grpc"]
+	path = qaf-support-grpc
+	url = https://github.com/qmetry/qaf-support-grpc.git
