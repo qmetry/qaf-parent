@@ -35,6 +35,5 @@ jobs:
       name: Install gpg secret key
       run: |
         cat <(echo -e "${{ secrets.OSSRH_GPG_SECRET_KEY }}") | gpg --batch --import
-        gpg --list-secret-keys --keyid-format LONG
     - name: Build with Ant
-      run: ant -noinput -buildfile build.xml build ivy-publish-share -Dskip.download=false  -Dpublish.resolver=nexus-${{ github.event.inputs.resolver }} -Dstatus=${{ github.event.inputs.resolver }} -D"version-num"=${{ github.event.inputs.version }} -D"build-num"=${{ github.event.inputs.build }} -Dgpg.pwd=${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }} -Dgpg.name=34FAB61338CB5AC4 -Dsonatype.user=${{ secrets.SONATYPE_USER }} -Dsonatype.pwd=${{ secrets.SONATYPE_SEC }}
+      run: ant -noinput -buildfile build.xml build ivy-publish-share -Dskip.download=false  -Dpublish.resolver=nexus-${{ github.event.inputs.resolver }} -Dstatus=${{ github.event.inputs.resolver }} -D"version-num=${{ github.event.inputs.version }}" -D"build-num=${{ github.event.inputs.build }}" -Dgpg.pwd=${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }} -Dgpg.name=34FAB61338CB5AC4 -Dsonatype.user=${{ secrets.SONATYPE_USER }} -Dsonatype.pwd=${{ secrets.SONATYPE_SEC }}
