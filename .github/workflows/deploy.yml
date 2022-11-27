@@ -1,16 +1,23 @@
 # This workflow will publish qaf artifacts
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-ant
 
-name: Java CI
+name: Deploy CI
 
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
-  repository_dispatch:
-    branches: [ master ]
-
+on: 
+  workflow_dispatch:
+    inputs:
+      resolver:
+        description: 'publish resolver: releases or snapshots'     
+        required: true
+        default: 'releases'
+      version:
+        description: 'version-num' 
+        required: true
+        default: '3.2'
+      build:
+        description: 'build-num' 
+        required: true
+        default: '0-SNAPSHOT'
 jobs:
   build:
 
@@ -30,4 +37,4 @@ jobs:
         cat <(echo -e "${{ secrets.OSSRH_GPG_SECRET_KEY }}") | gpg --batch --import
         gpg --list-secret-keys --keyid-format LONG
     - name: Build with Ant
-      run: ant -noinput -buildfile build.xml build, ivy-publish-share -Dskip.download=false -Dgpg.pwd=${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }} -Dgpg.name=34FAB61338CB5AC4
+      run: ant -noinput -buildfile build.xml build ivy-publish-share -Dskip.download=false  -Dpublish.resolver=nexus-${{ github.event.inputs.resolver }} -Dstatus=${{ github.event.inputs.resolver }} -Dversion-num=${{ github.event.inputs.version }} -Dbuild-num=${{ github.event.inputs.build }} -Dgpg.pwd=${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }} -Dgpg.name=34FAB61338CB5AC4 -Dsonatype.user=${{ secrets.SONATYPE_USER }} -Dsonatype.pwd=${{ secrets.SONATYPE_SEC }}
