@@ -29,12 +29,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Import GPG key
-      id: import_gpg
-      uses: crazy-max/ghaction-import-gpg@v5
-      with:
-          gpg_private_key: ${{ secrets.OSSRH_GPG_SECRET_KEY1 }}
-          passphrase: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
+    - id: install-secret-key
+      name: Install gpg secret key
+      run: |
+         cat <(echo -e "${{ secrets.OSSRH_GPG_SECRET_KEY_A }}") | gpg --batch --import
+         gpg --list-secret-keys --keyid-format LONG
     - name: Checkout submodules
       run: git submodule update --init --recursive
     - name: Set up JDK 1.8
