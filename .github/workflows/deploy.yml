@@ -32,7 +32,8 @@ jobs:
     - id: install-secret-key
       name: Install gpg secret key
       run: |
-         cat <(echo -e "${{ secrets.OSSRH_GPG_SECRET_KEY_A }}") | gpgv1 --import
+         apt install gnupg1
+         cat <(echo -e "${{ secrets.OSSRH_GPG_SECRET_KEY_A }}") | gpg --import
          gpg --list-secret-keys --keyid-format LONG
          echo 'yet another line' >> /home/runner/.gnupg/secring.gpg
     - name: Checkout submodules
