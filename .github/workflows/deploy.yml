@@ -29,11 +29,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - uses: olafurpg/setup-gpg@v3
-    - name: Install gpg secret key
-      run: |
-        cat <(echo -e "${{ secrets.OSSRH_GPG_SECRET_KEY }}") | gpg --batch --import
-        gpg --list-secret-keys --keyid-format LONG
+    - uses: oplik0/openpgp-action@v3
+      with:
+          text: example
+          key: 34FAB61338CB5AC4
+          privateKey: ${{ secrets.OSSRH_GPG_SECRET_KEY }}
+          passphrase: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
     - name: Checkout submodules
       run: git submodule update --init --recursive
     - name: Set up JDK 1.8
