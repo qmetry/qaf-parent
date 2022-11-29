@@ -33,7 +33,7 @@ jobs:
       with:
           text: example
           key: 34FAB61338CB5AC4
-          privateKey: ${{ secrets.OSSRH_GPG_SECRET_KEY }}
+          privateKey: ${{ secrets.OSSRH_GPG_SECRET_KEY1 }}
           passphrase: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
     - name: Checkout submodules
       run: git submodule update --init --recursive
