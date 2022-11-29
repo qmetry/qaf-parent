@@ -32,8 +32,8 @@ jobs:
     - uses: oplik0/openpgp-action@v3
       with:
           text: example
-          key: 34FAB61338CB5AC4
-          privateKey: ${{ secrets.OSSRH_GPG_SECRET_KEY1 }}
+          key: '34FAB61338CB5AC4'
+          privateKey: ${{ secrets.OSSRH_GPG_SECRET_KEY }}
           passphrase: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
     - name: Checkout submodules
       run: git submodule update --init --recursive
