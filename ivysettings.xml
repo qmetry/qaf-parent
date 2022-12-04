@@ -13,6 +13,8 @@
  	<credentials host="oss.sonatype.org"
                       realm="Sonatype Nexus Repository Manager"
                       username="${sonatype.user}" passwd="${sonatype.pwd}"/>
+    <classpath file="./pgpsigner-0.0.1.jar"/>
+    <typedef name="pgp2" classname="org.apache.ivy.plugins.signer.bouncycastle.OpenPGPSignatureGenerator2"/>
 	<settings defaultResolver="qaf" />
 	<property name="nexus-public"
                    value="https://oss.sonatype.org/content/groups/public"/>
@@ -51,6 +53,6 @@
 	    <artifact name="${ivy.module}-sources" ext="jar" conf="development" type="source"/>
 	</publications>
 	<signers >
-    	<pgp name="${gpg.name}" password="${gpg.pwd}"/>
+    	<pgp2 name="${gpg.name}" password="${gpg.pwd}"/>
 	</signers>
 </ivysettings>
