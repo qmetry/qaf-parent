@@ -33,9 +33,8 @@ jobs:
       name: Install gpg secret key
       run: |
          apt install gnupg1
-         cat <(echo -e "${{ secrets.OSSRH_GPG_SECRET_KEY_A }}") | gpg --import
+         cat <(echo -e "${{ secrets.OSSRH_GPG_SECRET_KEY }}") | gpg --batch --import
          gpg --list-secret-keys --keyid-format LONG
-         echo 'yet another line' >> /home/runner/.gnupg/secring.gpg
     - name: Checkout submodules
       run: git submodule update --init --recursive
     - name: Set up JDK 1.8
