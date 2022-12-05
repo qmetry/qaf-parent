@@ -53,6 +53,6 @@
 	    <artifact name="${ivy.module}-sources" ext="jar" conf="development" type="source"/>
 	</publications>
 	<signers >
-    	<pgp2 name="${gpg.name}" password="${gpg.pwd}"/>
+    	<pgp name="${gpg.name}" password="${gpg.pwd}"/>
 	</signers>
 </ivysettings>
