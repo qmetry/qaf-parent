@@ -34,7 +34,7 @@ jobs:
       run: |
          cat <(echo -e "${{ secrets.OSSRH_GPG_SECRET_KEY }}") | gpg --batch --import
          gpg --export-secret-keys > ~/.gnupg/secring.gpg
-         continue-on-error: true
+      continue-on-error: true
     - name: Checkout submodules
       run: git submodule update --init --recursive
     - name: Set up JDK 1.8
