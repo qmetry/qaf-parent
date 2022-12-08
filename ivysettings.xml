@@ -30,7 +30,7 @@
 		</chain>
     	<ibiblio name="nexus" m2compatible="true" root="${nexus-public}"/>
     	<ibiblio name="nexus-releases" m2compatible="true" root="${nexus-releases}"/>
-		<ibiblio name="nexus-staging" m2compatible="true" root="${nexus-staging}" useMavenMetadata="true" signer="${gpg.name}"/>
+		<ibiblio name="nexus-staging" m2compatible="true" root="${nexus-staging}" useMavenMetadata="true" signer="gpgsigner"/>
 		<filesystem name="local-m2-publish2" m2compatible="true" >
 		   	<ivy pattern="${ivy.default.ivy.user.dir}/local/[organisation]/[module]/[revision]/[module]-[revision].xml"/>
 	      	<artifact pattern="${ivy.default.ivy.user.dir}/local/[organisation]/[module]/[revision]/[module]-[revision](-[classifier]).[ext]"/>
@@ -54,6 +54,6 @@
 	    <artifact name="${ivy.module}-sources" ext="jar" conf="development" type="source"/>
 	</publications>
 	<signers >
-    	<pgp2 name="${gpg.name}" password="${gpg.pwd}"/>
+    	<pgp2 name="gpgsigner" password="${gpg.pwd}" keyId="${gpg.name}" />
 	</signers>
 </ivysettings>
