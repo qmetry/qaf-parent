@@ -13,6 +13,7 @@
  	<credentials host="oss.sonatype.org"
                       realm="Sonatype Nexus Repository Manager"
                       username="${sonatype.user}" passwd="${sonatype.pwd}"/>
+    <classpath url="https://repo1.maven.org/maven2/org/apache/maven/shared/maven-shared-utils/3.3.4/maven-shared-utils-3.3.4.jar"/>
     <classpath file="./pgpsigner-0.0.1.jar"/>
     <typedef name="pgp2" classname="org.apache.ivy.plugins.signer.bouncycastle.OpenPGPSignatureGenerator2"/>
 	<settings defaultResolver="qaf" />
