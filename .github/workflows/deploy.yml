@@ -7,9 +7,9 @@ on:
   workflow_dispatch:
     inputs:
       status:
-        description: 'publish status: releases or snapshots'     
+        description: 'publish status: release or snapshots'     
         required: true
-        default: 'releases'
+        default: 'release'
       resolver:
         description: 'publish resolver: staging or snapshots'     
         required: true
@@ -32,8 +32,7 @@ jobs:
     - id: install-secret-key
       name: Install gpg secret key
       run: |
-         cat <(echo -e "${{ secrets.OSSRH_GPG_SECRET_KEY }}") | gpg --batch --import
-         gpg --export-secret-keys > ~/.gnupg/secring.gpg
+         cat <(echo -e "${{ secrets.OSSRH_GPG_SECRET_KEY_A }}") | gpg --batch --import
       continue-on-error: true
     - name: Checkout submodules
       run: git submodule update --init --recursive
