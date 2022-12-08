@@ -1,36 +1,48 @@
 [submodule "qaf"]
 	path = qaf
 	url = https://github.com/qmetry/qaf.git
+	branch = master
 [submodule "qaf-cucumber"]
 	path = qaf-cucumber
 	url = https://github.com/qmetry/qaf-cucumber.git
+	branch = master
 [submodule "qaf-support-openapi"]
 	path = qaf-support-openapi
 	url = https://github.com/qmetry/qaf-support-openapi.git
+	branch = master
 [submodule "qaf-support"]
 	path = qaf-support
 	url = https://github.com/qmetry/qaf-support.git
+	branch = master
 [submodule "qaf-support-ws"]
 	path = qaf-support-ws
 	url = https://github.com/qmetry/qaf-support-ws.git
+	branch = master
 [submodule "qaf-support-elasticsearch"]
 	path = qaf-support-elasticsearch
 	url = https://github.com/qmetry/qaf-support-elasticsearch.git
+	branch = master
 [submodule "qaf-support-flutter"]
 	path = qaf-support-flutter
 	url = https://github.com/qmetry/qaf-support-flutter.git
+	branch = master
 [submodule "qaf-support-angular"]
 	path = qaf-support-angular
 	url = https://github.com/qmetry/qaf-support-angular.git
+	branch = master
 [submodule "qaf-support-galen"]
 	path = qaf-support-galen
 	url = https://github.com/qmetry/qaf-support-galen.git
+	branch = master
 [submodule "qaf-support-mobile"]
 	path = qaf-support-mobile
 	url = https://github.com/qmetry/qaf-support-mobile.git
+	branch = master
 [submodule "qaf-support-aem"]
 	path = qaf-support-aem
 	url = https://github.com/qmetry/qaf-support-aem.git
+	branch = master
 [submodule "qaf-support-grpc"]
 	path = qaf-support-grpc
 	url = https://github.com/qmetry/qaf-support-grpc.git
+	branch = master
