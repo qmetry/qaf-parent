@@ -32,7 +32,7 @@ jobs:
     - id: install-secret-key
       name: Install gpg secret key
       run: |
-         cat <(echo -e "${{ secrets.OSSRH_GPG_SECRET_KEY_A }}") | gpg --batch --import
+         cat <(echo -e "${{ secrets.OSSRH_GPG_SECRET_KEY1 }}") | gpg --batch --import
       continue-on-error: true
     - name: Checkout submodules
       run: git submodule update --init --recursive
