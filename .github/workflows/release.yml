@@ -14,11 +14,11 @@ on:
         description: 'build-num' 
         required: true
         default: '0-SNAPSHOT'
+permissions: write-all
 jobs:
   build:
 
     runs-on: ubuntu-latest
-    permissions: write-all
     steps:
     - uses: actions/checkout@v3
     - name: Checkout submodules
