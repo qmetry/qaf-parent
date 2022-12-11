@@ -18,7 +18,10 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
+    permissions: 
+      contents: write
+      packages: write
+      pull-requests: write
     steps:
     - uses: actions/checkout@v3
     - name: Checkout submodules
@@ -30,3 +33,5 @@ jobs:
     - name: Build with Ant
       run: |
         ant -noinput -buildfile build.xml tag-release-all -Dskip.download=false -D"release.num=${{ github.event.inputs.version }}.${{ github.event.inputs.build }}" -D"ivy.revision=${{ github.event.inputs.version }}.${{ github.event.inputs.build }}"
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
