@@ -28,7 +28,8 @@ jobs:
       with:
         java-version: 1.8
     - name: Build with Ant
-      run: |
+    - uses: oleksiyrudenko/gha-git-credentials@v2-latest
+      with:
+        token: '${{ secrets.GITHUB_TOKEN }}'
+    - run: |
         ant -noinput -buildfile build.xml tag-release-all -Dskip.download=false -D"release.num=${{ github.event.inputs.version }}.${{ github.event.inputs.build }}" -D"ivy.revision=${{ github.event.inputs.version }}.${{ github.event.inputs.build }}"
-      env:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
