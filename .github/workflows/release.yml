@@ -31,4 +31,4 @@ jobs:
       run: |
         ant -noinput -buildfile build.xml tag-release-all -Dskip.download=false -D"release.num=${{ github.event.inputs.version }}.${{ github.event.inputs.build }}" -D"ivy.revision=${{ github.event.inputs.version }}.${{ github.event.inputs.build }}"
       env:
-        GITHUB_TOKEN: ${{secrets.QAF_ALL_BUILD_TOKEN}}
+        GITHUB_TOKEN: ${{secrets.GIT_TOKEN}}
